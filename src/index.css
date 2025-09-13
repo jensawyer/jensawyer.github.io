@@ -1,0 +1,299 @@
+:root {
+    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+/* end components */
+
+/* Base */
+    html, body, #root { height: 100%; }
+    body {
+        background: #0f0d11;
+        font-family: var(--font-sans), sans-serif;
+        color: #e2e8f0;
+        margin: 0;
+    }
+    h1, h2, h3, h4 {
+        font-family: var(--font-heading), sans-serif;
+        line-height: 1.1;
+        color: #f1f5f9;
+    }
+    a { color: #e2e8f0; }
+    a:hover { color: #ea580c; }
+
+    code, pre, kbd, samp { font-family: var(--font-mono), monospace; }
+}
+
+/* Components */
+    /* Layout containers */
+    .container { max-width: 72rem; margin-inline: auto; padding-inline: 1rem; }
+    @media (min-width: 768px) { .container { padding-inline: 1.5rem; } }
+
+    .section { padding-block: 3rem; }
+    .section-inner { position: relative; }
+    .section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .section-title { font-size: 1.5rem; } }
+
+    /* Base card */
+    .card {
+        border-radius: 1rem; /* 16px */
+        border: 1px solid rgba(255,255,255,0.10);
+        background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(0,0,0,0));
+        padding: 1.25rem; /* 20px */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .card-sm { padding: 1rem; }
+    .card-hover { transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0)); }
+    .card-focus:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(99,102,241,0.8); }
+
+    /* Fonts */
+    .font-heading { font-family: var(--font-heading); }
+    .font-body    { font-family: var(--font-sans); }
+    .font-mono    { font-family: var(--font-mono); }
+
+    /* Basic typography helpers */
+    .muted { color: rgba(226,232,240,0.8); }
+    .link { color: #c7d2fe; }
+    .link:hover { color: #e0e7ff; }
+
+    /* Markdown typography */
+    .prose { color: #e2e8f0; }
+    .prose h1, .prose h2, .prose h3, .prose h4 { color: #f1f5f9; line-height: 1.2; margin: 1.25rem 0 0.75rem; }
+    .prose p { margin: 0.75rem 0; }
+    .prose a { color: #c7d2fe; }
+    .prose a:hover { color: #e0e7ff; }
+
+    /* NavBar */
+    .navbar { position: sticky; top: 0; left: 0; right: 0; width: 100%; z-index: 30; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .navbar-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 0.75rem; }
+    .navbar-brand { display: flex; align-items: center; gap: 0.5rem; }
+    .navbar-name { letter-spacing: 0.02em; font-size: 0.9rem; opacity: 0.95; }
+    .nav-links { display: none; gap: 1.25rem; font-size: 0.95rem; opacity: 0.9; align-items: center; }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-link { color: #e2e8f0; text-decoration: none; }
+    .nav-link:hover { color: #ffffff; }
+    .btn { display: inline-flex; align-items: center; border-radius: 0.75rem; padding: 0.5rem 0.75rem; font-weight: 600; text-decoration: none; }
+    .btn-gradient { background: linear-gradient(90deg, #E95420, #772953); color: white; }
+    .btn-gradient:hover { filter: brightness(1.05); }
+    .btn-primary { background: #4f46e5; color: white; padding: 0.5rem 1rem; border-radius: 0.75rem; text-decoration: none; }
+    .btn-primary:hover { background: #4338ca; }
+    .btn-outline { border: 1px solid rgba(226,232,240,0.4); padding: 0.5rem 1rem; border-radius: 0.75rem; text-decoration: none; color: #e2e8f0; }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
+    /* Hero */
+    .hero { padding: 1.5rem; display: grid; gap: 0.75rem; }
+    @media (min-width: 768px) { .hero { padding: 2rem; gap: 1rem; } }
+    .hero-title { font-size: 2rem; font-weight: 800; margin: 0; }
+    @media (min-width: 768px) { .hero-title { font-size: 2.5rem; } }
+    .hero-accent { color: #ea580c; }
+    .hero-subtitle { font-size: 1.1rem; margin: 0; opacity: 0.95; }
+    .hero-actions { display: flex; gap: 0.75rem; }
+    
+    /* Logo + glyph */
+    .logo-mark { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 0.5rem; background: linear-gradient(135deg, #E95420, #772953); }
+    .logo-mark__text { font-size: 10px; }
+    .glyph-box { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 1rem; background: linear-gradient(135deg, rgba(233,84,32,0.8), rgba(119,41,83,0.8)); }
+    .glyph-box__text { font-size: 11px; }
+
+    /* Mode toggle */
+    .mode-toggle { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; align-items: center; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); padding: 4px; }
+    .mode-toggle__thumb { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 8px); border-radius: 0.75rem; background: rgba(255,255,255,0.95); box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.25); transition: transform 200ms ease; }
+    .mode-toggle--manager .mode-toggle__thumb { transform: translateX(100%); }
+    .mode-toggle__btn { position: relative; z-index: 1; padding: 0.5rem 1rem; background: transparent; border: none; border-radius: 0.75rem; color: rgba(255,255,255,0.85); font-weight: 700; font-size: 1rem; cursor: pointer; }
+    .mode-toggle__btn.is-active { color: #0f172a; }
+
+    /* About layout */
+    .about-layout { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .about-layout { grid-template-columns: 1fr 2fr; align-items: start; } }
+
+    /* Footer */
+    .footer {
+        width: 100%;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        background: rgba(0,0,0,0.2);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+    }
+    .footer-inner { max-width: 72rem; margin: 0 auto; padding: 1.25rem 1rem; text-align: center; font-size: 0.9rem; color: #94a3b8; }
+}
+
+/* Utilities */
+    .bg-app-gradient {
+        background:
+            radial-gradient(80% 70% at 0% 0%, rgba(233,84,32,0.25) 0%, rgba(233,84,32,0) 60%),
+            radial-gradient(70% 60% at 100% 0%, rgba(119,41,83,0.35) 0%, rgba(119,41,83,0) 60%),
+            linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0));
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .glass-card {
+        border-radius: 1rem;
+        border: 1px solid rgba(255,255,255,0.20);
+        background-color: rgba(255,255,255,0.25);
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.14);
+    }
+
+    /* Stronger frost/opacity when you need a very visible panel */
+    .glass-strong {
+        border: 1px solid rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.45);
+        -webkit-backdrop-filter: blur(32px);
+        backdrop-filter: blur(32px);
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;
+    }
+
+    /* Dark frosted panel for high-contrast blocks over bright photos */
+    .glass-dark {
+        border: 1px solid rgba(255,255,255,0.2);
+        background-color: rgba(0,0,0,0.4);
+        -webkit-backdrop-filter: blur(32px);
+        backdrop-filter: blur(32px);
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset;
+    }
+
+    /* Soft dark vignette to help contrast on busy photos */
+    .bg-vignette {
+        background-image:
+          radial-gradient(120% 80% at 50% 0%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.0) 55%),
+          radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.0) 60%);
+        background-repeat: no-repeat;
+        background-size: 100% 100%, 100% 100%;
+        background-position: top center, bottom center;
+    }
+
+    /* Optional text shadow to lift light headings on photos */
+    .text-shadow-sm { text-shadow: 0 1px 1px rgba(0,0,0,0.35); }
+    /* strong (still tasteful) */
+    .bg-spotlight {
+        /* top layer: orange radial glow from right-center */
+        /* fallback (no color-mix support): uncomment the next line and comment the color-mix line */
+        /* background-image: radial-gradient(60% 80% at 100% 50%, var(--color-orange-700) 0%, transparent 60%), */
+        background-image:
+                radial-gradient(60% 80% at 100% 50%, color-mix(in oklab, var(--color-orange-700) 35%, transparent) 0%, transparent 60%),
+                linear-gradient(90deg, var(--color-fuchsia-950), var(--color-fuchsia-900));
+        background-repeat: no-repeat, no-repeat;
+        background-size: 100% 100%, 100% 100%;
+        background-position: center, center;
+        color: white; /* optional: looks good on this bg; override if needed */
+    }
+
+    /* even softer glow */
+    .bg-spotlight-soft {
+        background-image:
+                radial-gradient(60% 80% at 100% 50%, color-mix(in oklab, var(--color-orange-700) 20%, transparent) 0%, transparent 60%),
+                linear-gradient(90deg, var(--color-fuchsia-950), var(--color-fuchsia-900));
+        background-repeat: no-repeat, no-repeat;
+        background-size: 100% 100%, 100% 100%;
+        background-position: center, center;
+        color: white;
+    }
+
+/* end utilities */
+
+/* App structure */
+.app-content { position: relative; z-index: 10; }
+.main { padding-top: 1rem; }
+
+/* Frosted glass panel (feature-query optimized) */
+.glass-panel {
+  --glass-thickness: 4px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* ensure correct stacking for backdrop */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: hsl(0deg 0% 100% / 0.95);
+  border-radius: 1rem; /* matches rounded-2xl visual even without class */
+}
+.glass-panel--dark {
+  background: hsl(220deg 23% 12% / 0.75);
+}
+.glass-panel__backdrop { display: none; }
+.glass-panel__edge { display: none; }
+
+@supports (backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px)) {
+  .glass-panel { background: hsl(0deg 0% 100% / 0.5); }
+  .glass-panel--dark { background: hsl(220deg 23% 12% / 0.55); }
+
+  .glass-panel__backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    backdrop-filter: blur(16px) saturate(120%);
+    background: linear-gradient(to bottom, hsl(0deg 0% 95%), transparent 50%);
+    /* Strong fallback to ensure visible panel even if blur is blocked */
+    background-color: rgba(17, 25, 40, 0.45);
+    pointer-events: none;
+  }
+  .glass-panel--dark .glass-panel__backdrop {
+    background: linear-gradient(to bottom, hsl(220deg 23% 18% / 0.85), transparent 55%);
+  }
+
+  .glass-panel__edge {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--glass-thickness);
+    background: hsl(0deg 0% 100% / 0.10);
+    -webkit-backdrop-filter: blur(12px) brightness(0.96);
+    backdrop-filter: blur(12px) brightness(0.96);
+    transform: translateY(100%);
+    pointer-events: none;
+  }
+}
+
+/* Simplified: remove mask-image optimization for broader IDE/bundle compatibility */
+/* If you want the performance optimization later, we can restore with proper prefixing. */
+
+/* Project group styling */
+.project-group {
+  border-radius: 1.5rem; /* 24px */
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.project-group__header {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.25rem; background: rgba(255,255,255,0.04);
+}
+.project-group__meta { min-width: 0; }
+.project-group__title { font-family: var(--font-heading); font-size: 1.125rem; font-weight: 700; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.project-group__desc { font-size: 0.9rem; opacity: 0.85; margin: 0.25rem 0 0; }
+.project-group__cards { display: grid; gap: 1rem; padding: 1.25rem; }
+
+.badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; padding: 0; list-style: none; }
+.badge { font-size: 0.75rem; opacity: 0.9; padding: 0.15rem 0.5rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.05); }
+
+/* Simple grids */
+.grid-2 { display: grid; gap: 1rem; }
+@media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Simple glass fallback: apply blur directly on the panel element */
+.glass-simple {
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+  background-color: rgba(17, 25, 40, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Proxy-blurred background using CSS variable set by Background component */
+.glass-proxy {
+  position: relative;
+  overflow: hidden;
+}
+.glass-proxy::before {
+  content: "";
+  position: absolute;
+  inset: -24px; /* extend to avoid edge artifacts */
+  background-image: var(--app-bg-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(120%);
+  transform: scale(1.06);
+  z-index: -1;
+}
