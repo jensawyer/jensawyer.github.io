@@ -4,15 +4,15 @@ export default function Hero() {
             <div className="container">
                 <div className="section-glass hero">
                     <h1 className="hero-title">
-                        Where others see chaos, I build clarity
+                        I think about the big picture
                         <br/>
-                        <span className="hero-accent"> in software and in people.</span>
+                        <span className="hero-accent"> Code, data, people, and business working together </span>
                     </h1>
                     <p className="hero-subtitle">
-                        I bridge research, engineering, and leadership to turn complex ideas into working systems.
+                        A product is an ecosystem that thrives only when data, code, people, and business sustain each other.
                     </p>
                     <div className="hero-actions">
-                        <a className="btn btn-primary" href="#projects">View Projects</a>
+                        <a className="btn btn-gradient" href="#projects">View Projects</a>
                         <a className="btn btn-outline" href="#contact">Contact</a>
                     </div>
                 </div>

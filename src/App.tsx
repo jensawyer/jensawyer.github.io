@@ -2,16 +2,17 @@ import { useEffect, useState } from "react"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import NavBar from "./components/NavBar"
 import Hero from "./components/Hero"
-import AboutSection from "./components/AboutSection"
 import ProjectsSection from "./components/ProjectsSection"
 import ContactSection from "./components/ContactSection"
 import BlogIndex from "./pages/BlogIndex"
 import BlogPost from "./pages/BlogPost"
 import Background from "./components/Background"
-import TestimonialsSection from "./components/TestimonialsSection"
+import AboutSection from "./components/AboutSection"
+import Section from "./components/Section"
+import RecommendationsCarousel from "./components/RecommendationsCarousel"
 
 
-export type Mode = "engineer" | "manager"
+export type Mode = "engineer" | "aiengineer" | "manager"
 
 export default function App() {
    const [mode, setMode] = useState<Mode>(()=> {
@@ -32,8 +33,10 @@ export default function App() {
                             <>
                                 <Hero />
                                 <AboutSection mode={mode} setMode={setMode} />
-                                <TestimonialsSection />
                                 <ProjectsSection />
+                                <Section id="recommendations" title="Recommendations">
+                                    <RecommendationsCarousel />
+                                </Section>
                                 <ContactSection />
                                 <footer className="footer">
                                     <div className="footer-inner">

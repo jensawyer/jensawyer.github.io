@@ -8,15 +8,29 @@ export default function ModeToggle({
   mode: Mode
   setMode: (m: Mode) => void
 }) {
-  const isManager = mode === "manager"
-
   function key(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      e.preventDefault()
-      setMode(isManager ? "engineer" : "manager")
-    } else if (e.key === "Home") setMode("engineer")
-    else if (e.key === "End") setMode("manager")
+    const order: Mode[] = ["engineer", "aiengineer", "manager"]
+    const idx = order.indexOf(mode)
+    if (e.key === "ArrowRight") {
+      e.preventDefault(); setMode(order[(idx + 1) % order.length])
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault(); setMode(order[(idx - 1 + order.length) % order.length])
+    } else if (e.key === "Home") setMode(order[0])
+    else if (e.key === "End") setMode(order[order.length - 1])
   }
+
+  const Button = ({ label, value }: { label: string; value: Mode }) => (
+    <button
+      type="button"
+      role="radio"
+      aria-checked={mode === value}
+      tabIndex={mode === value ? 0 : -1}
+      onClick={() => setMode(value)}
+      className={`mode-toggle__btn ${mode === value ? "is-active" : ""}`}
+    >
+      {label}
+    </button>
+  )
 
   return (
     <div
@@ -24,29 +38,12 @@ export default function ModeToggle({
       aria-label="Profile mode"
       onKeyDown={key}
       tabIndex={0}
-      className={`mode-toggle ${isManager ? "mode-toggle--manager" : ""}`}
+      className="mode-toggle"
+      style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
     >
-      <span aria-hidden className="mode-toggle__thumb" />
-      <button
-        type="button"
-        role="radio"
-        aria-checked={!isManager}
-        tabIndex={!isManager ? 0 : -1}
-        onClick={() => setMode("engineer")}
-        className={`mode-toggle__btn ${!isManager ? "is-active" : ""}`}
-      >
-        Engineer Mode
-      </button>
-      <button
-        type="button"
-        role="radio"
-        aria-checked={isManager}
-        tabIndex={isManager ? 0 : -1}
-        onClick={() => setMode("manager")}
-        className={`mode-toggle__btn ${isManager ? "is-active" : ""}`}
-      >
-        Manager Mode
-      </button>
+      <Button label="Engineer" value="engineer" />
+      <Button label="AI Engineer" value="aiengineer" />
+      <Button label="Leader" value="manager" />
     </div>
   )
 }

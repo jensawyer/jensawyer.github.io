@@ -11,8 +11,8 @@ export default function NavBar() {
                 </div>
                 <nav className="nav-links">
                     <a className="nav-link" href="/#about">About</a>
-                    <a className="nav-link" href="/#testimonials">Testimonials</a>
-                    <a className="nav-link" href="/#consulting">Consulting</a>
+                    <a className="nav-link" href="/#projects">Projects</a>
+                    <a className="nav-link" href="/#recommendations">Recommendations</a>
                     <Link className="nav-link" to="/blog">Blog</Link>
                 </nav>
                 <a href="#consulting" className="btn btn-gradient">Hire me</a>
