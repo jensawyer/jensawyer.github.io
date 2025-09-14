@@ -4,9 +4,9 @@ import { testimonials } from "../content/testimonials"
 export default function TestimonialsSection() {
   return (
     <Section id="testimonials" title="Testimonials">
-      <ul className="grid-2">
+      <div className="grid-2">
         {testimonials.map((t) => (
-          <li key={`${t.name}-${t.role ?? ""}`} className="card">
+          <div key={`${t.name}-${t.role ?? ""}`} className="card card-opaque">
             <blockquote>
               <p>“{t.text}”</p>
             </blockquote>
@@ -19,9 +19,9 @@ export default function TestimonialsSection() {
                 </a>
               ) : null}
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </Section>
   )
 }

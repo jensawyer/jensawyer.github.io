@@ -1,4 +1,3 @@
-import React from "react"
 import Glyph from "./Glyph"
 import ProjectCard from "./ProjectCard"
 import type { ProjectCardData } from "../types/projects"

@@ -14,9 +14,9 @@ function shortDate(iso: string) {
 export default function BlogIndex() {
     return (
         <Section id="blog" title="Blog">
-            <ul style={{ display: "grid", gap: "1rem" }}>
+            <div style={{ display: "grid", gap: "1rem" }}>
                 {posts.map(p => (
-                    <li key={p.slug} className="card card-hover">
+                    <article key={p.slug} className="card card-opaque">
                         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
                             <div>
                                 <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
@@ -30,9 +30,9 @@ export default function BlogIndex() {
                             <Link className="link" to={`/blog/${p.slug}`}>Read</Link>
                         </div>
                         <p style={{ marginTop: "0.75rem", color: "#cbd5e1" }}>{p.excerpt}</p>
-                    </li>
+                    </article>
                 ))}
-            </ul>
+            </div>
         </Section>
     )
 }

@@ -2,7 +2,7 @@ export default function Hero() {
     return (
         <section id="home" className="section">
             <div className="container">
-                <div className="glass-card hero">
+                <div className="section-glass hero">
                     <h1 className="hero-title">
                         Where others see chaos, I build clarity
                         <br/>

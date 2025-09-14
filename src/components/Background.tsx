@@ -22,8 +22,6 @@ export default function Background() {
   return (
     <>
       <div aria-hidden style={{ ...layerStyle, backgroundImage: `url(${chosen})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-      <div aria-hidden className="bg-vignette" style={layerStyle} />
-      <div aria-hidden className="bg-app-gradient" style={layerStyle} />
     </>
   )
 }

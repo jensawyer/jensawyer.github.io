@@ -2,7 +2,8 @@
     --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
     --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-/* end components */
+    --app-bg-image: none;
+}
 
 /* Base */
     html, body, #root { height: 100%; }
@@ -21,7 +22,6 @@
     a:hover { color: #ea580c; }
 
     code, pre, kbd, samp { font-family: var(--font-mono), monospace; }
-}
 
 /* Components */
     /* Layout containers */
@@ -30,8 +30,11 @@
 
     .section { padding-block: 3rem; }
     .section-inner { position: relative; }
-    .section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; }
-    @media (min-width: 768px) { .section-title { font-size: 1.5rem; } }
+    .section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .section-title { font-size: 2rem; } }
 
     /* Base card */
     .card {
@@ -40,6 +43,15 @@
         background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(0,0,0,0));
         padding: 1.25rem; /* 20px */
         box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    /* Variant for inner cards placed on glass: a bit more opaque, less busy */
+    .card-opaque {
+        background: rgba(10,12,16,0.35);
+        border-color: rgba(255,255,255,0.12);
+        /* Sunken/inset look: dark inner shading + subtle top inner highlight */
+        box-shadow:
+          inset 0 2px 4px rgba(0,0,2,0.30),
+          inset 0 -1px 0 rgba(255,255,255,0.1);
     }
     .card-sm { padding: 1rem; }
     .card-hover { transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease; }
@@ -64,7 +76,17 @@
     .prose a:hover { color: #e0e7ff; }
 
     /* NavBar */
-    .navbar { position: sticky; top: 0; left: 0; right: 0; width: 100%; z-index: 30; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 30;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        background: rgba(0,0,0,0.6);
+        border-bottom: 3px solid rgba(255,255,255,0.20); }
     .navbar-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 0.75rem; }
     .navbar-brand { display: flex; align-items: center; gap: 0.5rem; }
     .navbar-name { letter-spacing: 0.02em; font-size: 0.9rem; opacity: 0.95; }
@@ -109,87 +131,64 @@
     /* Footer */
     .footer {
         width: 100%;
-        border-top: 1px solid rgba(255,255,255,0.05);
-        background: rgba(0,0,0,0.2);
+        border-top: 2px solid rgba(255,255,255,0.15);
+        background: rgba(0,0,0,0.6);
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
     }
-    .footer-inner { max-width: 72rem; margin: 0 auto; padding: 1.25rem 1rem; text-align: center; font-size: 0.9rem; color: #94a3b8; }
-}
+    .footer-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 1.25rem 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #94a3b8; }
 
 /* Utilities */
-    .bg-app-gradient {
-        background:
-            radial-gradient(80% 70% at 0% 0%, rgba(233,84,32,0.25) 0%, rgba(233,84,32,0) 60%),
-            radial-gradient(70% 60% at 100% 0%, rgba(119,41,83,0.35) 0%, rgba(119,41,83,0) 60%),
-            linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0));
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
 
-    .glass-card {
+    /* Section-level glass panel (soft, rounded, no gradient border) */
+    .section-glass {
         border-radius: 1rem;
-        border: 1px solid rgba(255,255,255,0.20);
-        background-color: rgba(255,255,255,0.25);
-        -webkit-backdrop-filter: blur(15px);
-        backdrop-filter: blur(15px);
-        box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.14);
+        border: 3px solid rgba(255,255,255,0.10);
+        background-color: rgba(255,255,255,0.03);
+        -webkit-backdrop-filter: blur(24px) saturate(120%);
+        backdrop-filter: blur(30px) saturate(120%);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.18), /* soft top highlight */
+            inset 0 -1px 0 rgba(0,0,0,0.08),      /* soft bottom shade */
+            0 16px 40px rgba(0,0,0,0.40),        /* ambient outer */
+            0 4px 10px rgba(0,0,0,0.40);         /* ambient outer */
     }
 
-    /* Stronger frost/opacity when you need a very visible panel */
-    .glass-strong {
-        border: 1px solid rgba(255,255,255,0.5);
-        background-color: rgba(255,255,255,0.45);
-        -webkit-backdrop-filter: blur(32px);
-        backdrop-filter: blur(32px);
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;
+    /* Inner glass-like cards placed on top of section glass */
+    .glass-card {
+        background: rgba(255,255,255,0.5);
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
+
+    /*!* Stronger frost/opacity when you need a very visible panel *!*/
+    /*.glass-strong {*/
+    /*    border: 1px solid rgba(255,255,255,0.5);*/
+    /*    background-color: rgba(255,255,255,0.45);*/
+    /*    -webkit-backdrop-filter: blur(32px);*/
+    /*    backdrop-filter: blur(32px);*/
+    /*    box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;*/
+    /*}*/
 
     /* Dark frosted panel for high-contrast blocks over bright photos */
-    .glass-dark {
-        border: 1px solid rgba(255,255,255,0.2);
-        background-color: rgba(0,0,0,0.4);
-        -webkit-backdrop-filter: blur(32px);
-        backdrop-filter: blur(32px);
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset;
-    }
+    /*.glass-dark {*/
+    /*    border: 1px solid rgba(255,255,255,0.2);*/
+    /*    background-color: rgba(0,0,0,0.4);*/
+    /*    -webkit-backdrop-filter: blur(32px);*/
+    /*    backdrop-filter: blur(32px);*/
+    /*    box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset;*/
+    /*}*/
 
-    /* Soft dark vignette to help contrast on busy photos */
-    .bg-vignette {
-        background-image:
-          radial-gradient(120% 80% at 50% 0%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.0) 55%),
-          radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.0) 60%);
-        background-repeat: no-repeat;
-        background-size: 100% 100%, 100% 100%;
-        background-position: top center, bottom center;
-    }
+    /* bg-vignette removed; using clean photos without overlays */
 
     /* Optional text shadow to lift light headings on photos */
-    .text-shadow-sm { text-shadow: 0 1px 1px rgba(0,0,0,0.35); }
-    /* strong (still tasteful) */
-    .bg-spotlight {
-        /* top layer: orange radial glow from right-center */
-        /* fallback (no color-mix support): uncomment the next line and comment the color-mix line */
-        /* background-image: radial-gradient(60% 80% at 100% 50%, var(--color-orange-700) 0%, transparent 60%), */
-        background-image:
-                radial-gradient(60% 80% at 100% 50%, color-mix(in oklab, var(--color-orange-700) 35%, transparent) 0%, transparent 60%),
-                linear-gradient(90deg, var(--color-fuchsia-950), var(--color-fuchsia-900));
-        background-repeat: no-repeat, no-repeat;
-        background-size: 100% 100%, 100% 100%;
-        background-position: center, center;
-        color: white; /* optional: looks good on this bg; override if needed */
-    }
-
-    /* even softer glow */
-    .bg-spotlight-soft {
-        background-image:
-                radial-gradient(60% 80% at 100% 50%, color-mix(in oklab, var(--color-orange-700) 20%, transparent) 0%, transparent 60%),
-                linear-gradient(90deg, var(--color-fuchsia-950), var(--color-fuchsia-900));
-        background-repeat: no-repeat, no-repeat;
-        background-size: 100% 100%, 100% 100%;
-        background-position: center, center;
-        color: white;
-    }
+    .text-shadow-sm { text-shadow: 0 2px 2px rgba(0,0,0,0.35); }
 
 /* end utilities */
 
@@ -254,15 +253,25 @@
 .project-group {
   border-radius: 1.5rem; /* 24px */
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.15);
   overflow: hidden;
 }
 .project-group__header {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.25rem; background: rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(0,0,0,0.30);
 }
 .project-group__meta { min-width: 0; }
-.project-group__title { font-family: var(--font-heading); font-size: 1.125rem; font-weight: 700; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.project-group__title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
 .project-group__desc { font-size: 0.9rem; opacity: 0.85; margin: 0.25rem 0 0; }
 .project-group__cards { display: grid; gap: 1rem; padding: 1.25rem; }
 
@@ -290,10 +299,13 @@
   content: "";
   position: absolute;
   inset: -24px; /* extend to avoid edge artifacts */
-  background-image: var(--app-bg-image);
+  background-image: var(--app-bg-image, none);
   background-size: cover;
   background-position: center;
   filter: blur(28px) saturate(120%);
   transform: scale(1.06);
   z-index: -1;
 }
+
+/* Beveled light edge for section panels */
+/* removed mask-based bevel */
