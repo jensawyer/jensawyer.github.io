@@ -1,5 +1,5 @@
 I’m Jennifer Sawyer - an engineer and linguist who loves to travel. The full screen photos here are from some of my favorite trips because 
-exploring new places and ideas has always shaped how I think and create.
+exploring new places and ideas has always shaped how I think and create. (Refresh for new photos)
 
 My path from theoretical linguistics into computer science started in 2010 with a multilingual feature grammar for Germanic
 languages, built on top of Regulus, a Prolog-based toolkit open-sourced from NASA that powered the first spoken dialog 

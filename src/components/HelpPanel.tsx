@@ -14,7 +14,7 @@ export default function HelpPanel({ mode }: Props) {
       : aboutManager
 
   return (
-    <div className="card card-opaque help-card" style={{ padding: "1rem" }}>
+    <div className="card card-opaque help-card">
       <Markdown source={source} className="prose" />
     </div>
   )

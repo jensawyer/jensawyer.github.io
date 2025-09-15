@@ -17,12 +17,12 @@ export default function BlogIndex() {
             <div style={{ display: "grid", gap: "1rem" }}>
                 {posts.map(p => (
                     <article key={p.slug} className="card card-opaque">
-                        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
+                        <div className="row-between">
                             <div>
-                                <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+                                <h3 className="card-title">
                                     <Link className="link" to={`/blog/${p.slug}`}>{p.title}</Link>
                                 </h3>
-                                <p className="muted" style={{ marginTop: "0.25rem", fontSize: "0.9rem" }}>
+                                <p className="muted muted-small" style={{ marginTop: "0.25rem" }}>
                                     {shortDate(p.date)} • {p.minutes} min read
                                     {p.categories.length ? ` • ${p.categories.join(", ")}` : ""}
                                 </p>

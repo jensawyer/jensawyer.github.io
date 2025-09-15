@@ -1,4 +1,9 @@
 import Section from "./Section"
+import { site } from "../content/site"
+
+function isExternal(url: string) {
+  return /^https?:\/\//i.test(url)
+}
 
 export default function ContactSection() {
   return (
@@ -6,9 +11,32 @@ export default function ContactSection() {
       <p className="muted">
         Best way to reach me:
         {" "}
-        <a className="link" href="#">GitHub</a>
-        {" "}•{" "}
-        <a className="link" href="#">LinkedIn</a>
+        {site.github && (
+          <>
+            <a
+              className="link"
+              href={site.github}
+              {...(isExternal(site.github) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              GitHub
+            </a>
+          </>
+        )}
+        {site.github && site.linkedin ? " • " : ""}
+        {site.linkedin && (
+          <>
+            <a
+              className="link"
+              href={site.linkedin}
+              {...(isExternal(site.linkedin) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              LinkedIn
+            </a>
+          </>
+        )}
+        {(!site.github && !site.linkedin) && (
+          <span>Coming soon</span>
+        )}
       </p>
     </Section>
   )

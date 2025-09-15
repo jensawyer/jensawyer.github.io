@@ -12,7 +12,7 @@ export default function ProjectCard({
                             }: ProjectCardProps) {
     return (
         <article className="card card-opaque">
-            <h3 style={{ fontSize: "1.1rem", fontWeight: 600, margin: 0 }}>{title}</h3>
+            <h3 className="card-title">{title}</h3>
             <p style={{ marginTop: "0.5rem" }}>{description}</p>
             <a
                 href={link}

@@ -27,10 +27,10 @@ export default function BlogPost() {
 
     return (
         <Section>
-            <article style={{ marginInline: "auto", maxWidth: "48rem" }}>
-                <header style={{ marginBottom: "1.5rem" }}>
+            <article className="article">
+                <header className="article__header">
                     <h1 style={{ fontSize: "2rem", fontWeight: 800, margin: 0 }}>{post.title}</h1>
-                    <p className="muted" style={{ marginTop: "0.5rem", display: "flex", flexWrap: "wrap", gap: "0.25rem 0.5rem", fontSize: "0.9rem" }}>
+                    <p className="muted meta-row" style={{ marginTop: "0.5rem" }}>
                         <time dateTime={post.date}>{longDate(post.date)}</time>
                         <span aria-hidden>•</span>
                         <span>{post.minutes} min read</span>

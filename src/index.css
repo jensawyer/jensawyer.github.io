@@ -91,6 +91,9 @@
         text-underline-offset: 2px;
     }
 
+    /* Small muted variant */
+    .muted-small { font-size: 0.9rem; }
+
     /* Accent inline link style (for toggles like Read more) */
     .link-accent { color: var(--accent-color); text-decoration: underline; background: none; border: none; padding: 0; cursor: pointer; font-size: 1rem; }
 
@@ -176,7 +179,7 @@
     /* About layout */
     .about-layout { display: grid; gap: 2rem; }
     @media (min-width: 768px) { .about-layout { grid-template-columns: 1fr 2fr; align-items: start; } }
-    .help-card { min-height: 12rem; }
+    .help-card { height: 14rem; overflow: auto; }
 
     /* Increase text legibility on bright photos */
     .text-elevated { text-shadow: 0 1px 1px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.35); }
@@ -197,14 +200,17 @@
     @media (min-width: 1024px) { .split-panels { grid-template-columns: 1fr 1fr; } }
 
     /* Carousel */
-    .carousel { display: grid; gap: 0.75rem; }
-    .carousel-track { position: relative; min-height: 10rem; }
-    .carousel-slide { position: absolute; inset: 0; opacity: 0; transform: scale(0.98); transition: opacity 200ms ease, transform 200ms ease; }
-    .carousel-slide.is-active { position: relative; opacity: 1; transform: scale(1); }
-    .carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+    .carousel { display: flex; flex-direction: column; gap: 0.75rem; }
+    .carousel-track { position: relative; height: 14rem; overflow: hidden; border-radius: 1rem; }
+    .carousel-slide { position: absolute; inset: 0; opacity: 0; transform: scale(0.98); transition: opacity 200ms ease, transform 200ms ease; display: flex; flex-direction: column; pointer-events: none; }
+    .carousel-slide.is-active { opacity: 1; transform: scale(1); pointer-events: auto; }
+    /* Allow long content (after Read more) to scroll inside the fixed card */
+    .carousel-body { flex: 1 1 auto; min-height: 0; overflow: auto; padding: 0 0.25rem 1.25rem 0.25rem; }
+    .carousel-meta { margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.9; padding: 0.5rem 0.25rem 0 0.25rem; border-top: 1px solid rgba(255,255,255,0.15); }
+    .carousel-controls { display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
     .carousel-dots { display: flex; gap: 0.5rem; align-items: center; }
-    .carousel-dots .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(226,232,240,0.5); border: none; cursor: pointer; }
-    .carousel-dots .dot.is-active { width: 18px; background: #e2e8f0; }
+    .carousel-dots .dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(226,232,240,0.7); border: none; cursor: pointer; }
+    .carousel-dots .dot.is-active { width: 20px; background: #e2e8f0; }
 
     /* Footer */
     .footer {
@@ -281,4 +287,26 @@
 .grid-2 { display: grid; gap: 1rem; }
 @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+/* Shared helpers to replace common inline styles */
 
+/* Section-glass inner padding */
+.panel-padding { padding: 1.5rem; }
+
+/* Row that spreads items horizontally */
+.row-between { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.row-between--wrap { flex-wrap: wrap; align-items: center; }
+
+/* Blockquote left rule and indent */
+.blockquote { margin: 0; padding-left: 1rem; border-left: 2px solid rgba(255,255,255,0.18); }
+
+/* Consistent small card/title heading */
+.card-title { font-size: 1.1rem; font-weight: 700; margin: 0; }
+
+/* Article layout for blog posts */
+.article { margin-inline: auto; max-width: 48rem; }
+.article__header { margin-bottom: 1.5rem; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 0.9rem; }
+
+/* Help section emphasis and layout */
+.help-hint { color: #f1f5f9; font-weight: 500; }
+.help-toggle-row { margin-bottom: 0.5rem; }

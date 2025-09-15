@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { Recommendation } from "../types/recommendations"
-import { recommendations } from "../content/recommendations"
+import { recommendations } from "../content/recommendationsLoader"
+import Markdown from "./Markdown"
 
 type Props = {
   intervalMs?: number
@@ -24,21 +25,63 @@ function truncate(text: string, maxChars: number) {
 
 export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 280 }: Props) {
   const items: Recommendation[] = useMemo(() => recommendations, [])
-  const [paused, setPaused] = useState(false)
-  const [active, setActive] = useAutoRotate(items.length, intervalMs, paused)
+  const [hoverPaused, setHoverPaused] = useState(false)
+  const [focusPaused, setFocusPaused] = useState(false)
   const [expanded, setExpanded] = useState<Record<number, boolean>>({})
   const regionRef = useRef<HTMLDivElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
+  const [resumeDelayPaused, setResumeDelayPaused] = useState(false)
+  const resumeTimerRef = useRef<number | null>(null)
+  const RESUME_DELAY_MS = 5000
+
+  const expandedPaused = useMemo(() => Object.values(expanded).some(Boolean), [expanded])
+  const effectivePaused = hoverPaused || focusPaused || expandedPaused || resumeDelayPaused
+  const [active, setActive] = useAutoRotate(items.length, intervalMs, effectivePaused)
 
   function onKeyDots(e: React.KeyboardEvent<HTMLDivElement>) {
     if (e.key === "ArrowRight") setActive((active + 1) % items.length)
     else if (e.key === "ArrowLeft") setActive((active - 1 + items.length) % items.length)
   }
 
+  function clearResumeTimer() {
+    if (resumeTimerRef.current !== null) {
+      clearTimeout(resumeTimerRef.current)
+      resumeTimerRef.current = null
+    }
+  }
+
+  function onFocus(_e: React.FocusEvent<HTMLDivElement>) {
+    setFocusPaused(true)
+    // If we re-focus, cancel any pending resume delay
+    clearResumeTimer()
+    setResumeDelayPaused(false)
+  }
+
+  function onBlur(e: React.FocusEvent<HTMLDivElement>) {
+    const current = e.currentTarget
+    const next = e.relatedTarget as Node | null
+    if (!next || !current.contains(next)) {
+      // Focus left the carousel completely: start a brief cooldown before resuming
+      setFocusPaused(false)
+      setResumeDelayPaused(true)
+      clearResumeTimer()
+      resumeTimerRef.current = window.setTimeout(() => {
+        setResumeDelayPaused(false)
+        resumeTimerRef.current = null
+      }, RESUME_DELAY_MS)
+    }
+  }
+
+  useEffect(() => () => clearResumeTimer(), [])
+
   return (
     <div
+      ref={rootRef}
       className="carousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHoverPaused(true)}
+      onMouseLeave={() => setHoverPaused(false)}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       <div
         ref={regionRef}
@@ -46,6 +89,9 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
         role="region"
         aria-roledescription="carousel"
         aria-label="Recommendations"
+        aria-live="polite"
+        tabIndex={0}
+        onKeyDown={onKeyDots}
       >
         {items.map((t, i) => {
           const isActive = i === active
@@ -57,17 +103,19 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
               className={`card card-opaque carousel-slide ${isActive ? "is-active" : ""}`}
               aria-hidden={!isActive}
             >
-              <blockquote style={{ margin: 0, paddingLeft: "1rem", borderLeft: "2px solid rgba(255,255,255,0.18)" }}>
-                <p style={{ margin: 0 }}>{body}</p>
-              </blockquote>
-              {t.text.length > maxChars && (
-                <div style={{ marginTop: "0.5rem", paddingLeft: "1rem" }}>
-                  <button className="link-accent" onClick={() => setExpanded(s => ({ ...s, [i]: !isExpanded }))}>
-                    {isExpanded ? "Show less" : "Read more"}
-                  </button>
-                </div>
-              )}
-              <div style={{ marginTop: "0.75rem", fontSize: "0.9rem", opacity: 0.9 }}>
+              <div className="carousel-body">
+                <blockquote className="blockquote">
+                  <Markdown source={body} className="prose" />
+                </blockquote>
+                {t.text.length > maxChars && (
+                  <div style={{ marginTop: "0.5rem", paddingLeft: "1rem" }}>
+                    <button className="link-accent" onClick={() => setExpanded(s => ({ ...s, [i]: !isExpanded }))}>
+                      {isExpanded ? "Show less" : "Read more"}
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="carousel-meta">
                 <div style={{ fontWeight: 600 }}>{t.name}</div>
                 {t.role ? <div style={{ opacity: 0.85 }}>{t.role}</div> : null}
                 {t.source?.url ? (
@@ -83,9 +131,6 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
 
       {items.length > 1 && (
         <div className="carousel-controls">
-          <button className="btn btn-outline" onClick={() => setActive((active - 1 + items.length) % items.length)} aria-label="Previous recommendation">
-            Prev
-          </button>
           <div className="carousel-dots" role="tablist" aria-label="Slide buttons" onKeyDown={onKeyDots}>
             {items.map((_, i) => (
               <button
@@ -98,9 +143,6 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
               />
             ))}
           </div>
-          <button className="btn btn-outline" onClick={() => setActive((active + 1) % items.length)} aria-label="Next recommendation">
-            Next
-          </button>
         </div>
       )}
     </div>

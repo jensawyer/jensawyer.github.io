@@ -1,5 +1,6 @@
 // src/components/ModeToggle.tsx
 import type { Mode } from "../App"
+import ModeToggleButton from "./ModeToggleButton"
 
 export default function ModeToggle({
   mode,
@@ -19,19 +20,6 @@ export default function ModeToggle({
     else if (e.key === "End") setMode(order[order.length - 1])
   }
 
-  const Button = ({ label, value }: { label: string; value: Mode }) => (
-    <button
-      type="button"
-      role="radio"
-      aria-checked={mode === value}
-      tabIndex={mode === value ? 0 : -1}
-      onClick={() => setMode(value)}
-      className={`mode-toggle__btn ${mode === value ? "is-active" : ""}`}
-    >
-      {label}
-    </button>
-  )
-
   return (
     <div
       role="radiogroup"
@@ -41,9 +29,9 @@ export default function ModeToggle({
       className="mode-toggle"
       style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
     >
-      <Button label="Engineer" value="engineer" />
-      <Button label="AI Engineer" value="aiengineer" />
-      <Button label="Leader" value="manager" />
+      <ModeToggleButton label="Engineer" value="engineer" active={mode === "engineer"} onSelect={setMode} />
+      <ModeToggleButton label="AI Engineer" value="aiengineer" active={mode === "aiengineer"} onSelect={setMode} />
+      <ModeToggleButton label="Leader" value="manager" active={mode === "manager"} onSelect={setMode} />
     </div>
   )
 }

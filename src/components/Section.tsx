@@ -24,7 +24,7 @@ export default function Section({
         <section id={id} className={`section ${className ?? ""}`}>
             <div className="container section-inner">
                 {glass ? (
-                    <div className={`section-glass ${panelClassName ?? ""}`} style={{ padding: "1.5rem" }}>
+                    <div className={`section-glass panel-padding ${panelClassName ?? ""}`}>
                         {title ? (
                             <h2 className={`section-title ${headingClassName ?? ""}`}>
                                 {title}
