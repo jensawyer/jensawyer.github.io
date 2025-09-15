@@ -202,10 +202,14 @@
     /* Carousel */
     .carousel { display: flex; flex-direction: column; gap: 0.75rem; }
     .carousel-track { position: relative; height: 14rem; overflow: hidden; border-radius: 1rem; }
+    .carousel-track.is-expanded { height: auto; overflow: visible; }
     .carousel-slide { position: absolute; inset: 0; opacity: 0; transform: scale(0.98); transition: opacity 200ms ease, transform 200ms ease; display: flex; flex-direction: column; pointer-events: none; }
     .carousel-slide.is-active { opacity: 1; transform: scale(1); pointer-events: auto; }
+    .carousel-track.is-expanded .carousel-slide { position: static; opacity: 1; transform: none; pointer-events: auto; display: none; }
+    .carousel-track.is-expanded .carousel-slide.is-active { display: flex; }
     /* Allow long content (after Read more) to scroll inside the fixed card */
     .carousel-body { flex: 1 1 auto; min-height: 0; overflow: auto; padding: 0 0.25rem 1.25rem 0.25rem; }
+    .carousel-track.is-expanded .carousel-body { overflow: visible; padding-bottom: 0; }
     .carousel-meta { margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.9; padding: 0.5rem 0.25rem 0 0.25rem; border-top: 1px solid rgba(255,255,255,0.15); }
     .carousel-controls { display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
     .carousel-dots { display: flex; gap: 0.5rem; align-items: center; }

@@ -32,15 +32,21 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
   const rootRef = useRef<HTMLDivElement | null>(null)
   const [resumeDelayPaused, setResumeDelayPaused] = useState(false)
   const resumeTimerRef = useRef<number | null>(null)
-  const RESUME_DELAY_MS = 5000
+  const RESUME_DELAY_MS = 3000
 
   const expandedPaused = useMemo(() => Object.values(expanded).some(Boolean), [expanded])
   const effectivePaused = hoverPaused || focusPaused || expandedPaused || resumeDelayPaused
   const [active, setActive] = useAutoRotate(items.length, intervalMs, effectivePaused)
 
   function onKeyDots(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (e.key === "ArrowRight") setActive((active + 1) % items.length)
-    else if (e.key === "ArrowLeft") setActive((active - 1 + items.length) % items.length)
+    if (e.key === "ArrowRight") {
+      // Collapse any expanded content before moving
+      if (Object.values(expanded).some(Boolean)) setExpanded({})
+      setActive((active + 1) % items.length)
+    } else if (e.key === "ArrowLeft") {
+      if (Object.values(expanded).some(Boolean)) setExpanded({})
+      setActive((active - 1 + items.length) % items.length)
+    }
   }
 
   function clearResumeTimer() {
@@ -85,7 +91,7 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
     >
       <div
         ref={regionRef}
-        className="carousel-track"
+        className={`carousel-track ${expandedPaused ? "is-expanded" : ""}`}
         role="region"
         aria-roledescription="carousel"
         aria-label="Recommendations"
@@ -139,7 +145,10 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
                 aria-selected={i === active}
                 aria-label={`Go to slide ${i + 1}`}
                 className={`dot ${i === active ? "is-active" : ""}`}
-                onClick={() => setActive(i)}
+                onClick={() => {
+                  if (Object.values(expanded).some(Boolean)) setExpanded({})
+                  setActive(i)
+                }}
               />
             ))}
           </div>
