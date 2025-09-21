@@ -14,6 +14,7 @@ import HelpPanel from "./components/HelpPanel"
 import ContactContent from "./components/ContactContent"
 import Footer from "./components/Footer"
 import ScrollToHash from "./components/ScrollToHash"
+import Analytics from "./components/Analytics"
 
 
 export type Mode = "engineer" | "aiengineer" | "manager"
@@ -30,6 +31,8 @@ export default function App() {
             <div className="app-content">
             <NavBar />
             <main className="main">
+                {/* GA4 route tracking */}
+                <Analytics id="G-TFVKNG7QWT" />
                 <ScrollToHash />
                 <Routes>
                     <Route
