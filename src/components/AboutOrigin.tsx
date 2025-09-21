@@ -29,7 +29,7 @@ export default function AboutOrigin() {
         <>
           <Markdown source={originRaw} className="prose" />
           <div style={{ marginTop: "0.5rem" }}>
-            <button className="link-accent" onClick={() => setExpanded(false)}>Collapse</button>
+            <button className="link-accent" onClick={() => setExpanded(false)}>Show less</button>
           </div>
         </>
       ) : (
