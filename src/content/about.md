@@ -6,7 +6,9 @@ languages, built on top of Regulus, a Prolog-based toolkit open-sourced from NAS
 system on the International Space Station. I used it to design a prototype conversational interface for a group of search
 and rescue robots in collaboration with a research group from Santa Clara University hosted at NASA Ames Research Center.
 That project hooked me. I had so much fun working with these physically embodied agents that it pulled me into a PhD program
-in computer science where my research focused on modeling alignment in conversational systems by building a hybrid language 
+in computer science. 
+
+In my grad program, I was very focused on NLP, machine learning, data mining, formal logic, and language modeling. There my research focused on modeling alignment in conversational systems by building a hybrid language 
 model and agent architecture similar in several ways to modern agent systems.
 
 Life took me out of academia before I could finish the PhD, but not before I earned my master’s and spent years immersed 

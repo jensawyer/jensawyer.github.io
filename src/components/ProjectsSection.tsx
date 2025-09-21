@@ -11,6 +11,7 @@ export default function ProjectsSection() {
                     title={g.title}
                     stack={g.stack}
                     desc={g.desc}
+                    descMd={g.descMd}
                     glyph={g.glyph}
                     cards={g.cards}
                 />

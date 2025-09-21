@@ -43,7 +43,9 @@ export default function BlogPost() {
                     </p>
                 </header>
 
-                <Markdown source={post.content} className="prose" />
+                <div className="card card-opaque article-body">
+                    <Markdown source={post.content} className="prose" />
+                </div>
 
                 <p style={{ marginTop: "2rem" }}>
                     <Link className="link" to="/blog">← Back to blog</Link>

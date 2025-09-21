@@ -9,12 +9,20 @@ const backgrounds = Object.entries(modules)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([, url]) => url)
 
+// Cache across route changes so we don't re-pick or re-fade within the SPA lifecycle.
+// Do NOT persist across page refresh — refreshing should pick a new random image.
+let cachedChosen: string | null = null
+let cachedLoaded = false
+
 export default function Background() {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState<boolean>(cachedLoaded)
   const chosen = useMemo(() => {
+    // Keep the same image across route changes, but pick a new one on full refresh
+    if (cachedChosen) return cachedChosen
     if (backgrounds.length === 0) return ""
     const i = Math.floor(Math.random() * backgrounds.length)
-    return backgrounds[i]
+    cachedChosen = backgrounds[i]
+    return cachedChosen
   }, [])
 
   useEffect(() => {
@@ -26,14 +34,18 @@ export default function Background() {
   }, [chosen])
 
   useEffect(() => {
-    if (!chosen) return
+    if (!chosen || loaded) return
     const img = new Image()
-    const handleLoad = () => setLoaded(true)
+    const handleLoad = () => {
+      cachedLoaded = true
+      setLoaded(true)
+    }
     img.addEventListener("load", handleLoad)
     img.src = chosen
-    if (img.complete) setLoaded(true)
+    if (img.complete) handleLoad()
     return () => img.removeEventListener("load", handleLoad)
-  }, [chosen])
+  }, [chosen, loaded])
+
 
   const layerStyle: React.CSSProperties = { position: "fixed", inset: 0, zIndex: 0 }
   return (

@@ -10,12 +10,12 @@ export default function NavBar() {
                     <span className="navbar-name font-heading">jen sawyer</span>
                 </div>
                 <nav className="nav-links">
-                    <a className="nav-link" href="/#about">About</a>
-                    <a className="nav-link" href="/#projects">Projects</a>
-                    <a className="nav-link" href="/#recommendations">Recommendations</a>
+                    <Link className="nav-link" to="/#about">About</Link>
+                    <Link className="nav-link" to="/#projects">Projects</Link>
+                    <Link className="nav-link" to="/#recommendations">Recommendations</Link>
                     <Link className="nav-link" to="/blog">Blog</Link>
                 </nav>
-                <a href="#consulting" className="btn btn-gradient">Hire me</a>
+                <Link to="/#contact" className="btn btn-gradient">Hire me</Link>
             </div>
         </header>
     )

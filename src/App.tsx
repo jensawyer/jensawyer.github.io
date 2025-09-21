@@ -3,13 +3,17 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import NavBar from "./components/NavBar"
 import Hero from "./components/Hero"
 import ProjectsSection from "./components/ProjectsSection"
-import ContactSection from "./components/ContactSection"
 import BlogIndex from "./pages/BlogIndex"
 import BlogPost from "./pages/BlogPost"
 import Background from "./components/Background"
-import AboutSection from "./components/AboutSection"
 import Section from "./components/Section"
 import RecommendationsCarousel from "./components/RecommendationsCarousel"
+import AboutBodySection from "./components/AboutBodySection"
+import ModeToggle from "./components/ModeToggle"
+import HelpPanel from "./components/HelpPanel"
+import ContactContent from "./components/ContactContent"
+import Footer from "./components/Footer"
+import ScrollToHash from "./components/ScrollToHash"
 
 
 export type Mode = "engineer" | "aiengineer" | "manager"
@@ -26,23 +30,40 @@ export default function App() {
             <div className="app-content">
             <NavBar />
             <main className="main">
+                <ScrollToHash />
                 <Routes>
                     <Route
                         path="/"
                         element={
                             <>
                                 <Hero />
-                                <AboutSection mode={mode} setMode={setMode} />
+                                {/* About body only */}
+                                <AboutBodySection />
+                                {/* Help + Contact side-by-side */}
+                                <Section glass={false}>
+                                    <div className="split-panels">
+                                        <div className="section-glass panel-padding panel-column">
+                                            <h3 className="section-title" style={{ margin: 0 }}>How I can help you</h3>
+                                            <p className="help-hint" style={{ margin: 0, marginBottom: "0.5rem" }}>
+                                                Pick a mode to see how I show up in that role.
+                                            </p>
+                                            <div className="help-toggle-row">
+                                                <ModeToggle mode={mode} setMode={setMode} />
+                                            </div>
+                                            <HelpPanel mode={mode} />
+                                        </div>
+                                        <div id="contact" className="section-glass panel-padding panel-column">
+                                            <h3 className="section-title" style={{ margin: 0 }}>Contact</h3>
+                                            <div className="card card-opaque contact-card stick-bottom">
+                                                <ContactContent />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Section>
                                 <ProjectsSection />
-                                <Section id="recommendations" title="Recommendations">
+                                <Section id="recommendations" title="What Others Say">
                                     <RecommendationsCarousel />
                                 </Section>
-                                <ContactSection />
-                                <footer className="footer">
-                                    <div className="footer-inner">
-                                        © {new Date().getFullYear()} Jen Sawyer
-                                    </div>
-                                </footer>
                             </>
                         }
                     />
@@ -57,6 +78,7 @@ export default function App() {
                     }/>
                 </Routes>
             </main>
+            <Footer />
             </div>
         </BrowserRouter>
     )

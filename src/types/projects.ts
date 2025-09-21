@@ -9,7 +9,7 @@ export type ProjectGroupData = {
   title: string
   glyph: string
   desc?: string
+  descMd?: string
   stack?: string[]
   cards: ProjectCardData[]
 }
-

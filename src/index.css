@@ -31,7 +31,7 @@
     .container { max-width: 72rem; margin-inline: auto; padding-inline: 1rem; }
     @media (min-width: 768px) { .container { padding-inline: 1.5rem; } }
 
-    .section { padding-block: 3rem; }
+    .section { padding-block: 1.5rem; }
     .section-inner { position: relative; }
     .section-title {
         font-size: 2rem;
@@ -72,6 +72,18 @@
     .prose h1 a, .prose h2 a, .prose h3 a, .prose h4 a { color: inherit; text-decoration: none; }
     .prose h1 a:hover, .prose h2 a:hover, .prose h3 a:hover, .prose h4 a:hover { color: inherit; text-decoration: none; }
     .prose p { margin: 0.75rem 0; }
+    /* Images inside Markdown */
+    .figure { margin: 1rem 0; }
+    .figure img,
+    .prose-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+    .figure__caption { text-align: center; font-size: 0.95rem; opacity: 0.85; margin-top: 0.5rem; }
 
     /* Unified content link styling (cards, markdown, and explicit .link) */
     .prose a,
@@ -179,7 +191,7 @@
     /* About layout */
     .about-layout { display: grid; gap: 2rem; }
     @media (min-width: 768px) { .about-layout { grid-template-columns: 1fr 2fr; align-items: start; } }
-    .help-card { height: 14rem; overflow: auto; }
+    .help-card { height: 24rem; overflow: auto; }
 
     /* Increase text legibility on bright photos */
     .text-elevated { text-shadow: 0 1px 1px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.35); }
@@ -253,8 +265,12 @@
 /* end utilities */
 
 /* App structure */
-.app-content { position: relative; z-index: 10; }
-.main { padding-top: 1rem; }
+.app-content { position: relative; z-index: 10; min-height: 100%; display: flex; flex-direction: column; }
+.main { padding-top: 1rem; flex: 1 0 auto; display: block; }
+
+/* Anchor offset so sticky navbar doesn't clip section titles */
+.section { scroll-margin-top: 80px; }
+#contact { scroll-margin-top: 80px; }
 
 /* legacy glass-panel styles removed */
 
@@ -265,9 +281,11 @@
   background: rgba(255,255,255,0.15);
   overflow: hidden;
 }
+/* Add vertical rhythm between stacked groups */
+.project-group + .project-group { margin-top: 1rem; }
 .project-group__header {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* top-align glyph with title */
     gap: 1rem;
     padding: 1rem 1.25rem;
     background: rgba(0,0,0,0.30);
@@ -291,6 +309,13 @@
 .grid-2 { display: grid; gap: 1rem; }
 @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+/* Contact panel card height to balance with Help */
+.contact-card { min-height: 24rem; }
+
+/* Flex column panel so inner card can pin to bottom */
+.panel-column { display: flex; flex-direction: column; }
+.stick-bottom { margin-top: auto; }
+
 /* Shared helpers to replace common inline styles */
 
 /* Section-glass inner padding */
@@ -307,10 +332,19 @@
 .card-title { font-size: 1.1rem; font-weight: 700; margin: 0; }
 
 /* Article layout for blog posts */
-.article { margin-inline: auto; max-width: 48rem; }
+.article { margin-inline: 0; max-width: none; }
 .article__header { margin-bottom: 1.5rem; }
+.article-body { margin-top: 1rem; margin-inline: 0; }
 .meta-row { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 0.9rem; }
 
 /* Help section emphasis and layout */
 .help-hint { color: #f1f5f9; font-weight: 500; }
-.help-toggle-row { margin-bottom: 0.5rem; }
+    .help-toggle-row { margin-bottom: 0.5rem; }
+    /* Make the toggle span full card width inside the panel */
+    .help-toggle-row .mode-toggle { display: grid; width: 100%; box-sizing: border-box; }
+
+/* Contact link row with icons */
+.contact-links { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1.25rem; text-align: center; }
+@media (min-width: 768px) { .contact-links { margin-top: 1.5rem; } }
+.contact-links .contact-link { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 1.75rem; line-height: 1.2; padding-block: 0.15rem; font-weight: 700; }
+@media (min-width: 768px) { .contact-links .contact-link { font-size: 2rem; } }
