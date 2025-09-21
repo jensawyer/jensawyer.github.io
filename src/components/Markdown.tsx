@@ -20,7 +20,7 @@ export default function Markdown({ source, className }: Props) {
                     rehypeHighlight,
                 ]}
                 components={{
-                    code({ inline, className, children, ...props }) {
+                    code({ inline, className, children, ...props }: any) {
                         const text = String(children ?? "")
                         if (inline) {
                             if (text.startsWith("accent:")) {
@@ -33,7 +33,7 @@ export default function Markdown({ source, className }: Props) {
                         // default render for code (inline or block)
                         return <code className={className} {...props}>{children}</code>
                     },
-                    img({ src, alt, ...props }) {
+                    img({ src, alt, ...props }: any) {
                         const rawAlt = String(alt ?? "")
                         const hasCaption = rawAlt.includes("|")
                         if (hasCaption) {

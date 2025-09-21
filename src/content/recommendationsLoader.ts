@@ -22,7 +22,7 @@ const files = import.meta.glob("../content/recos/*.md", {
   eager: true,
 }) as Record<string, string>
 
-function parse(path: string, raw: string): Recommendation | null {
+function parse(_path: string, raw: string): Recommendation | null {
   const { attributes, body } = fm<FM>(raw)
   const name = String(attributes.name ?? "").trim()
   const text = body.trim()
@@ -43,4 +43,3 @@ export const recommendations: Recommendation[] = recosUnsorted
     const db = b.date ? new Date(b.date).getTime() : 0
     return db - da
   })
-
