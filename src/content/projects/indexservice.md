@@ -10,7 +10,7 @@ and runnable with minimal effort by anyone evaluating the project.
 
 ### Why It’s Interesting
 
-- Most candidates implemented a reverse index, but as the instructions allowed for using any open source tools and they wanted to index thousands as part of testing, I went with Lucene.
+- Most candidates implemented a reverse index, but Lucene already does this and open source tools were allowed. This was the faster practical choice.
 - Lucene has a query language that looks very similar to the language defined, but it wasn't the same so I implmented the 
 language using parser combinators.
 - I included clear instructions to run the project locally and in a container, including the Dockerfile as required.
