@@ -14,10 +14,12 @@ export default function Analytics({ id }: Props) {
 
   useEffect(() => {
     if (typeof window === "undefined" || typeof window.gtag !== "function") return
-    // Track SPA navigation by sending the new path
-    window.gtag("config", id, { page_path: pathname + search })
+    // Track SPA navigation with richer page data
+    const page_path = pathname + search
+    const page_title = document.title
+    const page_location = window.location.href
+    window.gtag("config", id, { page_path, page_title, page_location })
   }, [id, pathname, search])
 
   return null
 }
-

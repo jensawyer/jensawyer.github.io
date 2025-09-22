@@ -1,4 +1,5 @@
 // src/pages/BlogPost.tsx
+import { useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import Section from "../components/Section"
 import Markdown from "../components/Markdown"
@@ -24,6 +25,10 @@ export default function BlogPost() {
             </Section>
         )
     }
+
+    useEffect(() => {
+        document.title = `${post.title} – Jen Sawyer`
+    }, [post.title])
 
     return (
         <Section>
