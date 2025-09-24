@@ -13,7 +13,7 @@ export default function ProjectCard({
     return (
         <article className="card card-opaque">
             <h3 className="card-title">{title}</h3>
-            <p style={{ marginTop: "0.5rem" }}>{description}</p>
+            <p className="project-card__desc">{description}</p>
             <a
                 href={link}
                 className="link"

@@ -1,4 +1,4 @@
-A simple project as part of interviewing for Yummly. The goal was to index thousands of recipes quickly and make them 
+A simple mini project used for an interview. The goal was to index thousands of recipes quickly and make them 
 queryable via a query language specified in the assignment. Then the entire project was supposed to be containerized 
 and runnable with minimal effort by anyone evaluating the project.
 
@@ -10,16 +10,16 @@ and runnable with minimal effort by anyone evaluating the project.
 
 ### Why It’s Interesting
 
-- Most candidates implemented a reverse index, but Lucene already does this and open source tools were allowed. This was the faster practical choice.
-- Lucene has a query language that looks very similar to the language defined, but it wasn't the same so I implmented the 
+- Most candidates implemented a reverse index, but Lucene already does this efficiently and open source tools were allowed. This was the faster practical choice.
+- Lucene has a query language that looks very similar to the language defined, but it wasn't the same so I implemented the 
 language using parser combinators.
 - I included clear instructions to run the project locally and in a container, including the Dockerfile as required.
-- This is an example of the sort of project that can be really useful for a pair programming interview where we add another fetaure.
+- This is an example of the sort of project that can be really useful for a pair programming interview where we add another feature.
 - It was really fun for me as a candidate too!
 
 ### How It’s Built
 
-- Scala 2.13.1
-- scala parser combinators for th query language
+- Scala 2.13
+- scala parser combinators for the query language
 - lucene4s to work with Lucene from Scala for indexing and querying
 - Tests via scalatest 
