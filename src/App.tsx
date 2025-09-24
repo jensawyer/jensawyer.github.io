@@ -9,9 +9,9 @@ import Background from "./components/Background"
 import Section from "./components/Section"
 import RecommendationsCarousel from "./components/RecommendationsCarousel"
 import AboutBodySection from "./components/AboutBodySection"
-import ModeToggle from "./components/ModeToggle"
-import HelpPanel from "./components/HelpPanel"
-import ContactContent from "./components/ContactContent"
+import SplitPanels from "./components/SplitPanels"
+import HelpSection from "./components/HelpSection"
+import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
 import ScrollToHash from "./components/ScrollToHash"
 import Analytics from "./components/Analytics"
@@ -44,24 +44,7 @@ export default function App() {
                                 <AboutBodySection />
                                 {/* Help + Contact side-by-side */}
                                 <Section glass={false}>
-                                    <div className="split-panels">
-                                        <div className="section-glass panel-padding panel-column">
-                                            <h3 className="section-title" style={{ margin: 0 }}>How I can help you</h3>
-                                            <p className="help-hint" style={{ margin: 0, marginBottom: "0.5rem" }}>
-                                                Pick a mode to see how I show up in that role.
-                                            </p>
-                                            <div className="help-toggle-row">
-                                                <ModeToggle mode={mode} setMode={setMode} />
-                                            </div>
-                                            <HelpPanel mode={mode} />
-                                        </div>
-                                        <div id="contact" className="section-glass panel-padding panel-column">
-                                            <h3 className="section-title" style={{ margin: 0 }}>Contact</h3>
-                                            <div className="card card-opaque contact-card stick-bottom">
-                                                <ContactContent />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <SplitPanels left={<HelpSection mode={mode} setMode={setMode} />} right={<ContactSection />} />
                                 </Section>
                                 <ProjectsSection />
                                 <Section id="recommendations" title="What Others Say">
