@@ -23,8 +23,28 @@ function truncate(text: string, maxChars: number) {
   return text.slice(0, maxChars - 1).trimEnd() + "…"
 }
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState<boolean>(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia === "undefined") return false
+    return window.matchMedia(query).matches
+  })
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia === "undefined") return
+    const mql = window.matchMedia(query)
+    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches)
+    // Set once in case query changes
+    setMatches(mql.matches)
+    mql.addEventListener("change", onChange)
+    return () => mql.removeEventListener("change", onChange)
+  }, [query])
+  return matches
+}
+
 export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 280 }: Props) {
   const items: Recommendation[] = useMemo(() => recommendations, [])
+  // Prefer a shorter excerpt on small screens so the Read more is visible without scrolling
+  const isSmallScreen = useMediaQuery("(max-width: 480px)")
+  const effectiveMaxChars = isSmallScreen ? Math.min(160, maxChars) : maxChars
   const [hoverPaused, setHoverPaused] = useState(false)
   const [focusPaused, setFocusPaused] = useState(false)
   const [expanded, setExpanded] = useState<Record<number, boolean>>({})
@@ -102,7 +122,7 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
         {items.map((t, i) => {
           const isActive = i === active
           const isExpanded = !!expanded[i]
-          const body = isExpanded ? t.text : truncate(t.text, maxChars)
+          const body = isExpanded ? t.text : truncate(t.text, effectiveMaxChars)
           return (
             <article
               key={`${t.name}-${t.role ?? ""}-${i}`}
@@ -110,11 +130,11 @@ export default function RecommendationsCarousel({ intervalMs = 6000, maxChars = 
               aria-hidden={!isActive}
             >
               <div className="carousel-body">
-                <blockquote className="blockquote">
+                <blockquote className={`blockquote ${!isExpanded ? "carousel-text--clamp" : ""}`}>
                   <Markdown source={body} className="prose" />
                 </blockquote>
-                {t.text.length > maxChars && (
-                  <div style={{ marginTop: "0.5rem", paddingLeft: "1rem" }}>
+                {t.text.length > effectiveMaxChars && (
+                  <div className="carousel-readmore">
                     <button className="link-accent" onClick={() => setExpanded(s => ({ ...s, [i]: !isExpanded }))}>
                       {isExpanded ? "Show less" : "Read more"}
                     </button>
