@@ -1,20 +1,15 @@
-I’m Jennifer Sawyer - an engineer and linguist who loves to travel. The full screen photos here are from some of my favorite trips because 
-exploring new places and ideas has always shaped how I think and create. (Refresh for new photos)
+I’m Jennifer Sawyer - an engineer and linguist who loves to travel. The full screen photos here are from some of my favorite trips because exploring new places and ideas has always shaped how I think and create. (Refresh for new photos)
 
-My path from theoretical linguistics into computer science started in 2010 with a multilingual feature grammar for Germanic
-languages, built on top of Regulus, a Prolog-based toolkit open-sourced from NASA that powered the first spoken dialog 
-system on the International Space Station. I used it to design a prototype conversational interface for a group of search
-and rescue robots in collaboration with a research group from Santa Clara University hosted at NASA Ames Research Center.
-That project hooked me. I had so much fun working with these physically embodied agents that it pulled me into a PhD program
-in computer science. 
+My path into computer science started in 2010 when I built a multilingual grammar for Germanic languages on top of Regulus, a Prolog-based toolkit open-sourced from NASA that powered the first spoken dialog system on the International Space Station. I used it to design a prototype conversational interface for a group of search-and-rescue robots in collaboration with a Santa Clara University team hosted at NASA Ames. The first time I said words into a mic and watched physical robots move, it felt a little like rolling a mage class in a game - I’d written some code, connected some systems, and suddenly language itself became a spell that could move machines in the real world.
 
-In my grad program, I was very focused on NLP, machine learning, data mining, formal logic, and language modeling. There my research focused on modeling alignment in conversational systems by building a hybrid language 
-model and agent architecture similar in several ways to modern agent systems.
+Working with those robots, my colleagues and I had fun imagining what else they could do - like bringing them to a bar to rescue us from awkward social situations or bad dates. That playfulness planted a seed: conversational systems didn’t have to be limited to efficiency and commands. They could be expressive, personable, even funny. As it happened, UCSC launched a new NLP lab that year with a focus on personality-driven language generation, so I leaned into that serendipity. While starting my PhD coursework, I published papers on expressive NLG for interactive narratives and embodied agents.
 
-Life took me out of academia before I could finish the PhD, but not before I earned my master’s and spent years immersed 
-in machine learning theory, NLP, logic, and language modelling. I’ve carried that fascination with me into industry, where
-I still bridge theory and practice, research and engineering, people and systems.
+My dissertation research came from a different kind of frustration: the language modeling component of conversational systems felt primitive and unsolved. At that point in time, the language model that understood what was said (NLU) was not even the same model that produced the response (NLG). It was impossible for one to affect the other in the nuanced ways that we can observe happening in humans. I broke off the alignment/adaptivity problem for the dissertation itself, but I always wanted to push further toward more neurologically inspired models - not quite deep learning as we know it today, but with some intriguing deep similarities.
 
-I’ve been into language models since before they were cool. I love understanding and explaining how they work, tracing 
-their evolution, family resemblances, and how they connect to the wider world of machine learning. Whether symbolic or 
-statistical, old-school or bleeding-edge, I’ve always been drawn to the challenge of making machines and people understand one another.
+What the story usually leaves out is that while I was doing this research, I was also working full-time as a software engineer. I wrote production code, built distributed systems, and shipped products at places like SchoolMessenger, Intel, Afero, and later Yummly. I balanced deep academic study in machine learning, NLP, and formal logic with the realities of making real maintainable systems that scale, behave, and hopefully delight users. That dual track shaped me into the kind of engineer who can seamlessly bridge theory and practice.
+
+I was also teaching and mentoring undergraduates - something I still do informally today. I saw firsthand how corrosive competitive, defensive environments could be, both in academia and industry, and how much better people did when they felt safe to be curious. Many of the principles I apply as a manager - transparency, respect, psychological safety, and accountability - grew out of those experiences. I’ve found that accountability is most powerful when paired with safety: in an open environment, people aren’t afraid to admit mistakes, which turns accountability into a learning experience instead of a punishment.
+
+Life took me out of academia before I could finish the PhD, but I left with a master’s degree and years of immersion in machine learning, NLP, logic, and language modeling. I’ve carried that fascination with me into every role since: from co-developing a wearable coaching agent at Intel, to architecting IoT data systems at Afero, to leading the design of multilingual search and recommender systems for 40M users at Yummly.
+
+I’ve been into language models since before they were cool. I love tracing their evolution, family resemblances, and how they connect to the wider world of machine learning. Whether symbolic or statistical, old-school or bleeding-edge, I’ve always been drawn to the challenge of making machines and people understand one another.
